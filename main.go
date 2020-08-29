@@ -28,8 +28,8 @@ func setupRouter() *gin.Engine {
 		DB: db,
 	}
 
-	r.GET("/customers", h.GetCustomerHandler)
-	r.GET("/customers/:id", task.GetCustomerByIdHandler)
+	r.GET("/todos", h.GetTodosHandler)
+	r.GET("/todos/:id", task.GetTodoByIdHandler)
 
 	//r.POST("/todos", task.CreateTodosHandler)
 	//r.PUT("/todos/:id", task.UpdateTodosHandler)
