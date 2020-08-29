@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
@@ -13,25 +14,11 @@ var db *sql.DB
 
 func init() {
 	var err error
-	db, err = sql.Open("postgres", "postgres://vttkxspt:sjA5CdRG1tepOQye8KB1ZMsPjQZ273V9@lallah.db.elephantsql.com:5432/vttkxspt")
-	//db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	//db, err = sql.Open("postgres", "postgres://vttkxspt:sjA5CdRG1tepOQye8KB1ZMsPjQZ273V9@lallah.db.elephantsql.com:5432/vttkxspt")
+	db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 
 	if err != nil {
 		log.Fatal(err)
-	}
-
-	createTb := `
-		CREATE TABLE IF NOT EXISTS customers
-		(
-			id SERIAL PRIMARY KEY,
-			name TEXT,
-			email TEXT,
-			status TEXT
-		);
-	`
-	_, err = db.Exec(createTb)
-	if err != nil {
-		log.Fatal("can't create table", err)
 	}
 }
 
