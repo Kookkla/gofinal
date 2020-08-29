@@ -28,12 +28,12 @@ func setupRouter() *gin.Engine {
 		DB: db,
 	}
 
-	r.GET("/todos", h.GetTodosHandler)
-	r.GET("/todos/:id", task.GetTodoByIdHandler)
+	r.GET("/customers", h.GetCustomersHandler)
+	r.GET("/customers/:id", task.GetCustomersByIdHandler)
 
-	//r.POST("/todos", task.CreateTodosHandler)
-	//r.PUT("/todos/:id", task.UpdateTodosHandler)
-	//r.DELETE("/todos/:id", task.DeleteTodosHandler)
+	r.POST("/customers", task.CreateCustomersHandler)
+	r.PUT("/customers/:id", task.UpdateCustomersHandler)
+	r.DELETE("/customers/:id", task.DeleteCustomersHandler)
 
 	return r
 }
