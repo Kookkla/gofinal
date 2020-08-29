@@ -19,16 +19,24 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	createTb := `
+		CREATE TABLE IF NOT EXISTS customers
+		(
+			id SERIAL PRIMARY KEY,
+			name TEXT,
+			email TEXT,
+			status TEXT
+		);
+	`
+	_, err = db.Exec(createTb)
+	if err != nil {
+		log.Fatal("can't create table", err)
+	}
 }
 
 type Customer struct {
 	ID     int    `json:"id"`
-	Name   string `json:"name"`
-	Email  string `json:"email"`
-	Status string `json:"status"`
-}
-
-type UpdateMessage struct {
 	Name   string `json:"name"`
 	Email  string `json:"email"`
 	Status string `json:"status"`

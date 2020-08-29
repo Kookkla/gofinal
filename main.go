@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"log"
 
 	"github.com/Kookkla/gofinal/customerservice"
 	"github.com/Kookkla/gofinal/middleware"
@@ -11,14 +10,6 @@ import (
 )
 
 var db *sql.DB
-
-func init() {
-	var err error
-	db, err = sql.Open("postgres", "postgres://vttkxspt:sjA5CdRG1tepOQye8KB1ZMsPjQZ273V9@lallah.db.elephantsql.com:5432/vttkxspt")
-	if err != nil {
-		log.Fatal(err)
-	}
-}
 
 func setupRouter() *gin.Engine {
 	r := gin.Default()
