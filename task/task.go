@@ -120,3 +120,49 @@ func DeleteTodosHandler(c *gin.Context) {
 
 	c.JSON(http.StatusOK, "deleted todo.")
 }
+
+//==============================
+
+func GetCustomerHandler(c *gin.Context) {
+	id := c.Param("id")
+
+	stmt, err := db.Prepare("SELECT id, title, status FROM todos where id=$1")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	row := stmt.QueryRow(id)
+
+	t := &Todo{}
+
+	err = row.Scan(&t.ID, &t.Title, &t.Status)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, t)
+}
+
+func GetCustomerByIdHandler(c *gin.Context) {
+	id := c.Param("id")
+
+	stmt, err := db.Prepare("SELECT id, title, status FROM todos where id=$1")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	row := stmt.QueryRow(id)
+
+	t := &Todo{}
+
+	err = row.Scan(&t.ID, &t.Title, &t.Status)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+		return
+	}
+
+	c.JSON(http.StatusOK, t)
+}
