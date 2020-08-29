@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"log"
+	"os"
 
 	"github.com/Kookkla/gofinal/customerservice"
 	"github.com/Kookkla/gofinal/middleware"
@@ -14,8 +15,8 @@ var db *sql.DB
 
 func checkDatabase() {
 	var err error
-	db, err = sql.Open("postgres", "postgres://vttkxspt:sjA5CdRG1tepOQye8KB1ZMsPjQZ273V9@lallah.db.elephantsql.com:5432/vttkxspt")
-	//db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	//db, err = sql.Open("postgres", "postgres://vttkxspt:sjA5CdRG1tepOQye8KB1ZMsPjQZ273V9@lallah.db.elephantsql.com:5432/vttkxspt")
+	db, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 
 	if err != nil {
 		log.Fatal(err)
