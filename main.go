@@ -4,7 +4,8 @@ import (
 	"database/sql"
 	"log"
 
-	"github.com/Kookkla/gofinal/task"
+	"github.com/Kookkla/gofinal/customerservice"
+	"github.com/Kookkla/gofinal/middleware"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
@@ -22,18 +23,18 @@ func init() {
 func setupRouter() *gin.Engine {
 	r := gin.Default()
 
-	//r.Use(middleware.Auth)
+	r.Use(middleware.Auth)
 
-	h := task.Handler{
+	h := customerservice.Handler{
 		DB: db,
 	}
 
 	r.GET("/customers", h.GetCustomersHandler)
-	r.GET("/customers/:id", task.GetCustomersByIdHandler)
+	r.GET("/customers/:id", customerservice.GetCustomersByIdHandler)
 
-	r.POST("/customers", task.CreateCustomersHandler)
-	r.PUT("/customers/:id", task.UpdateCustomersHandler)
-	r.DELETE("/customers/:id", task.DeleteCustomersHandler)
+	r.POST("/customers", customerservice.CreateCustomersHandler)
+	r.PUT("/customers/:id", customerservice.UpdateCustomersHandler)
+	r.DELETE("/customers/:id", customerservice.DeleteCustomersHandler)
 
 	return r
 }

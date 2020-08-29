@@ -1,4 +1,4 @@
-package task
+package customerservice
 
 import (
 	"database/sql"
@@ -26,6 +26,16 @@ type Customer struct {
 	Name   string `json:"name"`
 	Email  string `json:"email"`
 	Status string `json:"status"`
+}
+
+type UpdateMessage struct {
+	Name   string `json:"name"`
+	Email  string `json:"email"`
+	Status string `json:"status"`
+}
+
+type DeleteMessage struct {
+	Message string `json:"message"`
 }
 
 type Handler struct {
@@ -163,5 +173,7 @@ func DeleteCustomersHandler(c *gin.Context) {
 		log.Fatal("can't execute delete statment", err)
 	}
 
-	c.JSON(http.StatusOK, "deleted todo.")
+	t := DeleteMessage{}
+	t.Message = "customer deleted"
+	c.JSON(http.StatusOK, t)
 }
